@@ -1,9 +1,9 @@
 
-# ShipShape OOP Project
+# Srijuice Website
 
 ## Overview
 
-ShipShape is a maritime maintenance and supply company that provides ship repair services, sells marine spare parts, and offers ship repainting services. This project automates ShipShape’s manual processes through a Java Swing application.
+Welcome to the Srijuice project repository! This project is a website for Srijuice, a vibrant oasis of fresh, locally sourced juices. The website allows users to browse products, manage their accounts, and place orders. This README provides an overview of the project structure, setup instructions, and key functionalities.
 
 
 
@@ -26,94 +26,63 @@ ShipShape is a maritime maintenance and supply company that provides ship repair
 </table>
 
 
-## Features
 
-1. **Manage Customer Orders:** Add, update, and remove orders for repairs, repainting, and spare parts.
-   - **SQL Table:** `orders`
-   - Columns: `order_id`, `item_id`, `order_status`, `customer_id`
-
-2. **Manage Customers:** Track and maintain customer information.
-   - **SQL Table:** `customers`
-   - Columns: `customer_id`, `name`, `email`, `city`
-
-3. **Manage Suppliers:** Track suppliers and maintain contact information.
-   - **SQL Table:** `suppliers`
-   - Columns: `supplier_id`, `supplier_name`, `contact_info`
-
-4. **Manage Inventory:** Track stock levels, manage inventory items, and predict low stock.
-   - **SQL Table:** `inventory`
-   - Columns: `item_id`, `item_name`, `quantity`, `SupplierId`
-
-5. **Manage Employees:** Track employee information and schedules.
-   - **SQL Table:** `employees`
-   - Columns: `employee_id`, `employee_name`, `job_role`, `schedule`, `work_location`, `skills`, `email`
-
-6. **Allocate Employees to Jobs:** Schedule employees based on skills and availability.
-   - **SQL Table:** `employees`
-   - Columns: `employee_id`, `skills`, `schedule`
-
-7. **Monthly Sales Reports:** Generate reports on sales trends and top-selling items.
-   - **SQL Table:** `orders`
-   - Columns: `order_id`, `item_id`, `order_status`
-
-8. **Customer Notifications:** Notify customers when their order (e.g., repairs, repainting) is ready for collection.
-   - **SQL Table:** `customers`
-   - Columns: `customer_id`, `email`
-
-9. **Employee Notifications:** Notify employees when they are assigned a new job.
-   - **SQL Table:** `employees`
-   - Columns: `employee_id`, `email`
 
 
 ## Setup Instructions
 
 ### Prerequisites
 
-- Java Development Kit (JDK)
-- Eclipse IDE
+- Php
 - MySQL Database
 
 ### Installation
 
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/rekcah-pavi/ShipShape-OOP.git
+   git clone https://github.com/your-username/Srijuice.git
    ```
 
-2. **Open in Eclipse:**
-   - Open Eclipse IDE.
-   - Go to `File > Import > General > Projects from folder or Archive`.
-   - Select the cloned repository.
 
-3. **Configure Database Connection:**
-   - Open `sql_connecter.java`.
+2. **Configure Database Connection:**
+   - Open `SYS/server.php`.
    - Update the following fields with your database details:
-     ```java
-     private static final String JDBC_URL = "your_database_url";
-     private static final String USERNAME = "your_username";
-     private static final String PASSWORD = "your_password";
-     private static final String DATABASE_NAME = "your_database_name";
+     ```php
+     $servername = "";
+     $username = "";
+     $password = "";
+     $database = "";
      ```
 
-4. **Configure Mail Sender:**
-   - Open `Mail_sender.java`.
+4. **Configure Admin email , password:**
+   - Open `SYS/server.php`.
    - Update the following fields with your SMTP server details:
-     ```java
-     String smtp_host= "your_smtp_host";
-     String smtp_port= "your_smtp_port";
-     String mail_username= "your_mail_username";
-     String mail_password= "your_mail_password";
+     ```php
+     $admin_email = "";
+     $admin_pass = "";
      ```
 
 5. **Run the Application:**
-   - Right-click on the project in Eclipse.
-   - Select `Run As > Java Application`.
+     ```sh
+     php -S localhost:8000
+     ```
 
 
 
-## Project Specification
+## Technologies Used
 
-For detailed project specifications and requirements, refer to the project document [here](https://github.com/rekcah-pavi/ShipShape-OOP/blob/main/docs/OOP%20Project%202024.pdf).
+- **Frontend:**
+  - HTML5, CSS3, 
+  - JavaScript, jQuery, Ajax
+  - Font Awesome for icons
+
+- **Backend:**
+  - PHP for server-side scripting
+  - Session,Cookie management for user authentication
+
+- **Other Tools:**
+  - Google Maps API for embedding location maps
+    
 
 ## Contribution
 
