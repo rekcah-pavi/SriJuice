@@ -67,6 +67,7 @@ This project is a E-Commerce website named Srijuice. The website allows users to
 5. **Run the Application:**
      ```sh
      php -S localhost:8000
+     #or use xxamp
      ```
 
 
