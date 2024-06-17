@@ -104,7 +104,7 @@ This project is a E-Commerce website named Srijuice. The website allows users to
 ### 4. Account Management
 - Users can update their account details and address information.
 - Users can view their past orders.
-- Admins can update,delete, abd view orders.
+- Admins can update,delete, and view orders.
 
 ### 5. Shopping Cart
 - Displays a summary of the cart with total amount calculation.
