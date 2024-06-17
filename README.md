@@ -84,7 +84,30 @@ This project is a E-Commerce website for Srijuice, a vibrant oasis of fresh, loc
 
 - **Other Tools:**
   - Google Maps API for embedding location maps
-    
+
+## Key Functionalities
+
+### 1. Home Page
+- Displays a welcome message and an introduction to Srijuice.
+- Showcases featured juice products with images.
+
+### 2. Product Management
+- Admins can add, edit, and delete products.
+- Users can add products to their cart
+- Products are displayed with their images, names, and prices.
+
+### 3. User Authentication
+- Users can sign up and log in.
+- Admin and user sessions are managed to restrict access to certain pages.
+
+### 4. Account Management
+- Users can update their account details and address information.
+- Users can view their past orders.
+- Admins can update,delete, abd view orders.
+
+### 5. Shopping Cart
+- Displays a summary of the cart with total amount calculation.
+
 
 ## License
 
