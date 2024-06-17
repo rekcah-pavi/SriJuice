@@ -86,10 +86,6 @@ This project is a E-Commerce website for Srijuice, a vibrant oasis of fresh, loc
   - Google Maps API for embedding location maps
     
 
-## Contribution
-
-To contribute to this project, please fork the repository, create a new branch, and submit a pull request. Ensure your code follows the project's coding standards and includes appropriate documentation.
-
 ## License
 
 This project is licensed under the Unlicense License. See the [LICENSE](LICENSE) file for details.
