@@ -3,7 +3,7 @@
 
 ## Overview
 
-This project is a E-Commerce website for Srijuice, a vibrant oasis of fresh, locally sourced juices. The website allows users to browse products, manage their accounts, and place orders. This README provides an overview of the project structure, setup instructions, and key functionalities.
+This project is a E-Commerce website named Srijuice. The website allows users to browse products, manage their accounts, and place orders. This README provides an overview of the project structure, setup instructions, and key functionalities.
 
 
 
