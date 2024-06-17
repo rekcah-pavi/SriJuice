@@ -10,6 +10,8 @@ Welcome to the Srijuice project repository! This project is a website for Srijui
 
 ## Preview
 
+*Demo:* https://srijuice.cloudkp.com
+
 <table>
   <tr>
     <td><img src="https://github.com/rekcah-pavi/SriJuice/blob/main/photos/w1.png?raw=true"/></td>
