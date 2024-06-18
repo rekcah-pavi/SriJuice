@@ -81,7 +81,8 @@ This project is a E-Commerce website named Srijuice. The website allows users to
 
 - **Backend:**
   - PHP for server-side scripting
-  - Session,Cookie management for user authentication
+  - Session for user authentication
+  - Cookie for cart management
 
 - **Other Tools:**
   - Google Maps API for embedding location maps
