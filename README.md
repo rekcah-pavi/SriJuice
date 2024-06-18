@@ -58,7 +58,7 @@ This project is a E-Commerce website named Srijuice. The website allows users to
 
 4. **Configure Admin email , password:**
    - Open `SYS/server.php`.
-   - Update the following fields with your SMTP server details:
+   - Update the following fields with your details:
      ```php
      $admin_email = "";
      $admin_pass = "";
