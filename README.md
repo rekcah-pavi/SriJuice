@@ -43,6 +43,7 @@ This project is a E-Commerce website named Srijuice. The website allows users to
 1. **Clone the repository:**
    ```sh
    git clone https://github.com/rekcah-pavi/SriJuice
+   cd srijuice
    ```
 
 
