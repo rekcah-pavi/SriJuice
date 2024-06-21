@@ -10,13 +10,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  
     $name = mysqli_real_escape_string($conn, $_POST['uname']);
     $password = mysqli_real_escape_string($conn, $_POST['pass']);
+    $hashed_password = hash('sha256', $password);
 
 
 
     $result = $conn->query("select * from users where email = '$email'");
 
     if ($result->num_rows  > 0) {
-        $query = "UPDATE users SET name = '$name', password = '$password' WHERE email = '$email'";
+
+        $query = "UPDATE users SET name = '$name', password = '$hashed_password' WHERE email = '$email'";
         
         if ($conn->query($query)) {
             session_start();

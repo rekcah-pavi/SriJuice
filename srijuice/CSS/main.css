@@ -234,11 +234,11 @@ body {
 
 
 .modal-content {
-  background: linear-gradient(to bottom, #f0e009, #0de4d9);
+  background: linear-gradient(to bottom, #f0e109, #e40d0d88);
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 8px 4px 8px rgba(230, 67, 3, 0.1);
   width: 300px;
+  z-index: 1500;
 }
 
 

@@ -42,14 +42,15 @@ if(!isset($_SESSION['admin'])){
 
         <nav class="nav">
             <button class="nav-btn" id="ordersBtn"><i class="fas fa-shopping-cart"></i>Orders</button>
+            <button class="nav-btn" id="accountsBtn"><i class="fa-solid fa-user"></i>Accounts</button>
             <button class="nav-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i>Logout</button>
         </nav>
 
 
    
         <div class="content">
-            <div class="orders">
-            </div>  
+            <div class="orders"></div>  
+            <div class="accounts" style="display: none;"></div>
         </div>
     </div>
     <script src="JS/admin_account.js"></script>

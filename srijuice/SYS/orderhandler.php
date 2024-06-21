@@ -7,14 +7,15 @@ $result = $conn->query("SHOW TABLES LIKE 'orders'");
 
 if ($result->num_rows == 0) {
     $query = "CREATE TABLE orders (
-                order_id VARCHAR(10) PRIMARY KEY,
-                order_details JSON,
-                total DOUBLE,
-                count INT,
-                status VARCHAR(20),
-                date VARCHAR(20),
-                email VARCHAR(20)
-            )";
+            order_id VARCHAR(10) PRIMARY KEY,
+            order_details JSON,
+            total DOUBLE,
+            count INT,
+            status VARCHAR(20),
+            date VARCHAR(20),
+            email VARCHAR(50),
+            FOREIGN KEY (email) REFERENCES users(email) ON DELETE CASCADE
+    )";
 
     $result = $conn->query($query);
 

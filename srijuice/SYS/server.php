@@ -1,11 +1,15 @@
 <?php
-$servername = "";
-$username = "";
+$servername = "localhost";
+$username = "root";
 $password = "";
-$database = "";
+$database = "wad";
 
-$admin_email = "";
-$admin_pass = "";
+$admin_email = "pavi@admin.com";
+$admin_pass = "pavi";
+
+
+
+
 
 
 

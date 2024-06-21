@@ -1,8 +1,9 @@
 <?php
 session_start();
 include 'server.php';
+require 'mail_handler.php';
 
-// Ensure the orders table exists
+
 $result = $conn->query("SHOW TABLES LIKE 'orders'");
 if ($result->num_rows == 0) {
     $query = "CREATE TABLE orders (
@@ -22,7 +23,7 @@ if ($result->num_rows == 0) {
     }
 }
 
-// Check if user or admin is logged in
+
 if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
     echo json_encode(array("message" => "You need to login as admin first!"));
     return;
@@ -32,7 +33,6 @@ $isAdmin = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if (isset($_GET['id'])) {
-        // Fetch details of a specific order
         $order_id = mysqli_real_escape_string($conn, $_GET['id']);
         $query = "SELECT * FROM orders WHERE order_id = '$order_id'";
         $result = $conn->query($query);
@@ -66,10 +66,19 @@ if ($_SERVER["REQUEST_METHOD"] == "PUT") {
     if (isset($_PUT['id']) && isset($_PUT['status'])) {
         $order_id = mysqli_real_escape_string($conn, $_PUT['id']);
         $status = mysqli_real_escape_string($conn, $_PUT['status']);
+        $email =  mysqli_real_escape_string($conn, $_PUT['email']);
+
+        
         $query = "UPDATE orders SET status='$status' WHERE order_id='$order_id'";
+        
 
         if ($conn->query($query)) {
+            $title = 'Update on Your Order Status';
+            $body = 'Dear Customer,<br><br>We are happy to inform you that the status of your order (ID: #' . $order_id . ') has been updated to ' . $status . '.<br><br>Thank you for choosing us.<br><br>Best regards,<br>Srijuice Team';
+
+            $result = sendEmail($email, $email, $title, $body);
             echo json_encode(array("message" => "Order status updated successfully!"));
+            
         } else {
             echo json_encode(array("message" => "Error updating status: " . mysqli_error($conn)));
         }

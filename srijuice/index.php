@@ -1,25 +1,5 @@
 <?php
 session_start();
-
-
-
-
-if (isset($_SESSION['admin'])){
-  if (! isset($_GET['user'])) {
-      header("Location: ?user=admin");
-      exit();
-  }
-
-}
-else{
-  if (isset($_GET['user'])) {
-    header("Location: index.php");
-    exit();
-}
-
-}
-
-
 ?>
 
 

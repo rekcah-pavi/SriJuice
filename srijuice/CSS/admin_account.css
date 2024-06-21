@@ -269,6 +269,114 @@
     .status-dropdown option {
         padding: 5px;
     }
+
+    .accounts {
+        display: none;
+        background: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    
+    .account {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    
+    .account > div {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+    }
+    
+    .account > div > span {
+        font-weight: bold;
+    }
+    
+    .account-actions {
+        text-align: right;
+    }
+    
+    .account-actions .view-btn {
+        padding: 5px 15px;
+        border: none;
+        background: #333;
+        color: white;
+        cursor: pointer;
+        transition: background 0.3s;
+        border-radius: 5px;
+    }
+    
+    .account-actions .view-btn:hover {
+        background: #555;
+    }
+
+
+    .account > div {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+    }
+    
+    .account > div > span {
+        font-weight: bold;
+    }
+    
+    .address-details {
+        margin-top: 10px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    
+    .address-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+    }
+    
+    .address-key {
+        font-weight: bold;
+        flex: 1;
+        margin-right: 10px;
+    }
+    
+    .address-value {
+        flex: 2;
+        word-wrap: break-word;
+    }
+    
+    .toggle-address-btn {
+        padding: 5px 15px;
+        border: none;
+        background: #333;
+        color: white;
+        cursor: pointer;
+        transition: background 0.3s;
+        border-radius: 5px;
+    }
+    
+    .toggle-address-btn:hover {
+        background: #555;
+    }
+    
+    @media (max-width: 768px) {
+        .address-row {
+            flex-direction: column;
+        }
+    
+        .address-key, .address-value {
+            flex: none;
+            margin-right: 0;
+        }
+    }
+    
+    
+    
     
 
 }

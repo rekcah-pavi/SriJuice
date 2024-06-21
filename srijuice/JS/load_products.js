@@ -79,7 +79,7 @@ function addNewProductCard() {
 
     const addButton = document.createElement('div');
     addButton.className = "add-product-btn";
-    addButton.innerHTML = '<i class="fas fa-plus"></i> Add New Product'; // Using Font Awesome icon for "plus"
+    addButton.innerHTML = '<i class="fas fa-plus"></i> Add New Product';
 
     addButton.addEventListener('click', function() {
         showAddProductModal();
@@ -236,13 +236,7 @@ document.querySelectorAll('.bclose').forEach(span => {
 });
 
 
-window.onclick = function(event) {
-    const editModal = document.getElementById('editProductModal');
-    const addModal = document.getElementById('addProductModal');
-    if (event.target == editModal || event.target == addModal) {
-        closeModal();
-    }
-}
+
 
 
 document.getElementById('editProductForm').onsubmit = function(event) {

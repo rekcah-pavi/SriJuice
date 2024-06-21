@@ -7,7 +7,7 @@ div.innerHTML = `
         <li><a href="index.php"><i class="fa fa-apple-alt"></i> Home</a></li>
         <li><a href="products.php"><i class="fa fa-lemon"></i> Products</a></li>
         <li><a href="account.php"><i class="fa fa-info-circle"></i> Account</a></li>
-        <li><a href="cart.php"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+        <li id="dcc"><a href="cart.php"><i class="fa fa-shopping-cart"></i> Cart</a></li>
     </ul>
     <span class="menu-icon"><i class="fa fa-bars"></i></span>
   </nav>

@@ -6,6 +6,7 @@
 
     ordersBtn2.addEventListener('click', () => {
         ordersSection2.style.display = 'block';
+        accountsSection.style.display = 'none';
         fetchOrders();
     });
 
@@ -31,7 +32,7 @@
                     orderDiv.id = `order-${order.order_id}`;
                     orderDiv.innerHTML = `
                         <div><span>Order Id:</span> <a href="#">#${order.order_id}</a></div>
-                        <div><span>Email:</span> ${order.email}</div>
+                        <div><span>Email:</span><emm id="umail"> ${order.email}</emm></div>
                         <div><span>Status:</span>
                             <select class="status-dropdown" data-order-id="${order.order_id}">
                                 <option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>Pending</option>
@@ -99,13 +100,18 @@
     }
 
     window.saveOrderStatus = function(orderId) {
-        const selectElement = document.querySelector(`.status-dropdown[data-order-id="${orderId}"]`);
+        const orderDiv = document.querySelector(`#order-${orderId}`);
+        const selectElement = orderDiv.querySelector(`.status-dropdown[data-order-id="${orderId}"]`);
         const newStatus = selectElement.value;
+        const emailElement = orderDiv.querySelector('#umail');
+        const uemail = emailElement ? emailElement.textContent.trim() : '';
+        //alert(uemail);
+
 
         $.ajax({
             url: `SYS/admin_orderhandler.php`,
             method: 'PUT',
-            data: { id: orderId, status: newStatus },
+            data: { id: orderId, status: newStatus,email:uemail},
             success: function(response) {
                 var parsedResponse = JSON.parse(response);
                 show_message(parsedResponse.message);
@@ -135,5 +141,115 @@
         }
     }
 
+    var accountsBtn = document.getElementById('accountsBtn');
+    var accountsSection = document.querySelector('.accounts');
+
+    
+    accountsBtn.addEventListener('click', () => {
+        ordersSection2.style.display = 'none';
+        accountsSection.style.display = 'block';
+        fetchAccounts();
+    });
+    
+    window.fetchAccounts = function() {
+        $.ajax({
+            url: 'SYS/admin_accounthandler.php',
+            method: 'GET',
+            dataType: 'json',
+            success: function(accounts) {
+                if (!Array.isArray(accounts)) {
+                    accountsSection.innerHTML = 'No accounts found';
+                    return;
+                }
+    
+                accountsSection.innerHTML = '';
+                accounts.forEach(account => {
+                    const accountDiv = document.createElement('div');
+                    accountDiv.className = 'account';
+                    let addressContent;
+
+                    if (!account.address || account.address === "null") {
+                        addressContent = '<div>No address added</div>';
+                    } else {
+                        let address;
+                        if (typeof account.address === 'string') {
+                            try {
+                                address = JSON.parse(account.address);
+                            } catch (e) {
+                                addressContent = '<div>Invalid address format</div>';
+                            }
+                        } else {
+                            address = account.address;
+                        }
+
+                        if (address) {
+                            addressContent = Object.keys(address).map(key => `
+                                <div class="address-row">
+                                    <div class="address-key">${key}:</div>
+                                    <div class="address-value">${address[key]}</div>
+                                </div>
+                            `).join('');
+                        }
+                    }
+
+                    accountDiv.innerHTML = `
+                        <div><span>Name:</span> ${account.name}</div>
+                        <div><span>Email:</span> ${account.email}</div>
+                        <div>
+                            <button class="toggle-address-btn" onclick="toggleAddress('${account.email}')">Show/Hide Address</button>
+                            <button class="delete-btn" onclick="deleteAccount('${account.email}')">Delete Account</button>
+                        </div>
+                        <div class="address-details" id="address-${account.email}" style="display: none;">
+                            ${addressContent}
+                        </div>
+                    `;
+                    accountsSection.appendChild(accountDiv);
+                });
+
+            },
+            error: function(error) {
+                console.error('Error fetching accounts:', error);
+            }
+        });
+    };
+    
+    window.toggleAddress = function(email) {
+        const addressDiv = document.getElementById(`address-${email}`);
+        if (addressDiv.style.display === 'none') {
+            addressDiv.style.display = 'block';
+        } else {
+            addressDiv.style.display = 'none';
+        }
+    };
+
+
+    window.deleteAccount = function(email) {
+        if (confirm('Are you sure you want to delete this account?')) {
+            $.ajax({
+                url: 'SYS/admin_accounthandler.php',
+                method: 'DELETE',
+                data: { email: email },
+                success: function(response) {
+                    if (response.success) {
+                        show_message('Account deleted successfully');
+                        fetchAccounts();
+                    } else {
+                        show_message('Failed to delete account: ' + response.message);
+                    }
+                },
+                error: function(error) {
+                    console.error('Error deleting account:', error);
+                }
+            });
+        }
+    };
+    
+    
+    
+    
+
 ordersSection2.style.display = 'block';
 fetchOrders();
+
+
+

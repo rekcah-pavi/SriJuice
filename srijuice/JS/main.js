@@ -52,3 +52,16 @@ function show_message(text,href,htext){
     }, 5000);
 
 }
+
+function getCookie(name) {
+    let value = "; " + document.cookie;
+    let parts = value.split("; " + name + "=");
+    if (parts.length === 2) return parts.pop().split(";").shift();
+}
+
+const isAdmin = getCookie('admin') === 'true';
+
+
+if (isAdmin) {
+    document.getElementById("dcc").style.display = "none";
+}

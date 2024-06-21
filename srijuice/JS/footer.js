@@ -33,7 +33,7 @@ div.innerHTML = `
           </div>
           
           <h5 align="center">
-            Copyright © 2024 Srijuice - Developed by paviththanan.
+            Copyright © 2024 Srijuice
           </h5>
       </div>
     </footer>
