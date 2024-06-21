@@ -1,8 +1,8 @@
 <?php
-$servername = "localhost";
-$username = "root";
+$servername = "";
+$username = "";
 $password = "";
-$database = "wad";
+$database = "";
 
 $admin_email = "pavi@admin.com";
 $admin_pass = "pavi";
