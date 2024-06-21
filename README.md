@@ -3,7 +3,7 @@
 
 ## Overview
 
-This project is a E-Commerce website named Srijuice. The website allows users to browse products, manage their accounts, and place orders. This README provides an overview of the project structure, setup instructions, and key functionalities.
+This project is a Responsive E-Commerce website named Srijuice. The website allows users to browse products, manage their accounts, and place orders.
 
 
 
@@ -55,6 +55,16 @@ This project is a E-Commerce website named Srijuice. The website allows users to
      $username = "";
      $password = "";
      $database = "";
+     ```
+
+3. **Configure Email:**
+   - Open `SYS/mail_handler.php`.
+   - Update the following fields with your details:
+     ```php
+    $smtp_host= "";
+    $smtp_port="587";
+    $mail_username="";
+    $mail_password= "";
      ```
 
 4. **Configure Admin email , password:**
