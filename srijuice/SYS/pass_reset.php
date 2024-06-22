@@ -7,8 +7,8 @@ function encrypt($plaintext, $key, $cipher = 'AES-128-CTR') {
     $iv_length = openssl_cipher_iv_length($cipher);
     $iv = openssl_random_pseudo_bytes($iv_length);
     $encrypted = openssl_encrypt($plaintext, $cipher, $key, 0, $iv);
-    $encoded = urlencode(base64_encode($iv . $encrypted)); 
-    return $encoded;
+    $encoded = base64_encode($iv . $encrypted);
+    return urlencode($encoded);
 }
 
 function decrypt($ciphertext, $key, $cipher = 'AES-128-CTR') {
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 
-        $result = $conn->query("select * from users where email = '$email'");
+        $result = $conn->query("SELECT * FROM users WHERE email = '$email'");
 
         if ($result->num_rows == 0) {
             echo json_encode(array('success' => false, 'message' => "Email not found"));
@@ -54,24 +54,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     try {
-        $text = $_GET['code'];
+        if (!isset($_GET['code'])) {
+            echo "Invalid request";
+            return;
+        }
+
+        $ttext = $_GET['code'];
+        $text = urlencode($ttext);
+
+        
         $decryptedText = decrypt($text, $key);
+        if ($decryptedText === false) {
+            echo "Invalid or expired code";
+            return;
+        }
+
         $words = explode('-', $decryptedText);
+        if (count($words) !== 2) {
+            echo "Invalid  data";
+            return;
+        }
+
         $email = $words[0];
         $otime = $words[1];
 
-        if (time() - $otime > 600){
+
+
+        if (time() - $otime > 600) {
             header("Location: ../login.php?status=codexp");
             return;
-
         }
 
-        $result = $conn->query("select * from users where email = '$email'");
+        $result = $conn->query("SELECT * FROM users WHERE email = '$email'");
 
-        if ($result->num_rows  > 0) {
+        if ($result->num_rows > 0) {
             $rpass = generateRandomString();
             $hashed_password = hash('sha256', $rpass);
             $query = "UPDATE users SET password = '$hashed_password' WHERE email = '$email'";
@@ -79,20 +97,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             if ($conn->query($query)) {
                 header("Location: ../login.php?email=$email&pass=$rpass&status=resetd");
             } else {
-                echo "Error changing pass: " . mysqli_error($conn);
+                echo "Error changing pass: " . $conn->error;
             }
-            return;
-        }
-        else{
-            echo "user not found";
+        } else {
+            echo "User not found";
         }
     } catch (Exception $e) {
         echo $e->getMessage();
     }
-
 }
-
-
 ?>
-
-
