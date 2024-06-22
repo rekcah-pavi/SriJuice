@@ -4,8 +4,8 @@ $username = "";
 $password = "";
 $database = "";
 
-$admin_email = "pavi@admin.com";
-$admin_pass = "pavi";
+$admin_email = "";
+$admin_pass = "";
 
 
 
