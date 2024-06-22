@@ -1,5 +1,5 @@
 <?php
-// mail_sender.php
+
 
 require 'vendor/autoload.php'; 
 
@@ -11,7 +11,6 @@ function sendEmail($recipientEmail, $recipientName, $subject, $body) {
     $smtp_port="587";
     $mail_username="";
     $mail_password= "";
-    $mail = new PHPMailer(true);
 
 
     $mail = new PHPMailer(true);
