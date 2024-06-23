@@ -11,6 +11,7 @@ signinBtn.addEventListener("click", () => {
 
 
 function validateLogin() {
+  showLoading();
   var password = document.getElementById("password").value;
   var confirmPassword = document.getElementById("cpassword").value;
 
