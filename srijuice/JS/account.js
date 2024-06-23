@@ -95,6 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const ordersSection = document.querySelector('.orders');
             if (!Array.isArray(orders)) {
                 ordersSection.innerHTML = 'No orders found';
+                hideLoading();
                 return;
             }
 
