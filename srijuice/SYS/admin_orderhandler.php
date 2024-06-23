@@ -61,24 +61,49 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     return;
 }
 
+
 if ($_SERVER["REQUEST_METHOD"] == "PUT") {
     parse_str(file_get_contents("php://input"), $_PUT);
-    if (isset($_PUT['id']) && isset($_PUT['status'])) {
+    if (isset($_PUT['id']) && isset($_PUT['status']) && isset($_PUT['email'])) {
         $order_id = mysqli_real_escape_string($conn, $_PUT['id']);
         $status = mysqli_real_escape_string($conn, $_PUT['status']);
-        $email =  mysqli_real_escape_string($conn, $_PUT['email']);
+        $email = mysqli_real_escape_string($conn, $_PUT['email']);
 
-        
         $query = "UPDATE orders SET status='$status' WHERE order_id='$order_id'";
-        
 
         if ($conn->query($query)) {
             $title = 'Update on Your Order Status';
-            $body = 'Dear Customer,<br><br>We are happy to inform you that the status of your order (ID: #' . $order_id . ') has been updated to ' . $status . '.<br><br>Thank you for choosing us.<br><br>Best regards,<br>Srijuice Team';
+            $body = '
+                <html>
+                <head>
+                    <style>
+                        body { font-family: Arial, sans-serif; }
+                        .container { width: 600px; margin: 0 auto; }
+                        .header { background-color: #f8f8f8; padding: 20px; text-align: center; }
+                        .content { padding: 20px; }
+                        .footer { background-color: #f8f8f8; padding: 10px; text-align: center; font-size: 12px; color: #666; }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="header">
+                            <h1>Order Status Update</h1>
+                        </div>
+                        <div class="content">
+                            <p>Dear Customer,</p>
+                            <p>We are happy to inform you that the status of your order (ID: #' . htmlspecialchars($order_id) . ') has been updated to <strong>' . htmlspecialchars($status) . '</strong>.</p>
+                            <p>Thank you for choosing us. We appreciate your business and hope you enjoy your purchase.</p>
+                            <p>Best regards,<br>Srijuice Team</p>
+                        </div>
+                        <div class="footer">
+                            <p>&copy; ' . date('Y') . ' Srijuice. All rights reserved.</p>
+                        </div>
+                    </div>
+                </body>
+                </html>';
 
             $result = sendEmail($email, $email, $title, $body);
             echo json_encode(array("message" => "Order status updated successfully!"));
-            
         } else {
             echo json_encode(array("message" => "Error updating status: " . mysqli_error($conn)));
         }
@@ -87,6 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "PUT") {
     }
     return;
 }
+
 
 if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
     parse_str(file_get_contents("php://input"), $_DELETE);

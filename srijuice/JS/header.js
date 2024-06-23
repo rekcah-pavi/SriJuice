@@ -23,7 +23,23 @@ div.innerHTML = `
   </div>
 </div>
 
-  
+
+<div id="loadingContainer">
+  <div class="loader">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+</div>
   
 
 `
+
+
+function showLoading() {
+  document.getElementById('loadingContainer').style.display = 'flex';
+}
+
+function hideLoading() {
+  document.getElementById('loadingContainer').style.display = 'none';
+}

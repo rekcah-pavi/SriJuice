@@ -97,6 +97,7 @@ document.getElementById('cart-items').addEventListener('click', function(e) {
 });
 
 function fetchShippingAddress() {
+    showLoading();
     fetch('SYS/details.php')
         .then(response => response.json())
         .then(data => {
@@ -110,6 +111,7 @@ function fetchShippingAddress() {
             document.getElementById('address-postal').innerText = address.postalCode;
         })
         .catch(error => console.error('Error fetching shipping address:', error));
+        hideLoading();
 }
 
 document.getElementById('edit-address-btn').addEventListener('click', function() {
@@ -128,6 +130,7 @@ function place_order() {
         show_message("At least add one item!");
         return;
     }
+    showLoading();
 
     let cartItems = JSON.parse(getCookie('cards')) || [];
     let orderDetails = cartItems.map(item => ({
@@ -152,9 +155,11 @@ function place_order() {
             show_message(jsonResponse.message, "account.php", "Go to orders");
             document.cookie = 'cards=; Path=/; Expires=Thu, 01 Jan 2000 00:00:01 GMT;';
             loadCartItems();
+            hideLoading();
         },
         error: function(xhr, status, error) {
             console.error("AJAX Error:", status, error);
+            hideLoading();
         }
     });
 }

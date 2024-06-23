@@ -15,6 +15,7 @@
     });
 
     window.fetchOrders = function () {
+        showLoading();
         $.ajax({
             url: 'SYS/admin_orderhandler.php',
             method: 'GET',
@@ -49,15 +50,18 @@
                         </div>
                     `;
                     ordersSection2.appendChild(orderDiv);
+                    hideLoading();
                 });
             },
             error: function(error) {
                 console.error('Error fetching orders:', error);
+                hideLoading();
             }
         });
     }
 
     window.viewOrder = function (orderId) {
+        showLoading();
         $.ajax({
             url: `SYS/admin_orderhandler.php?id=${orderId}`,
             method: 'GET',
@@ -85,9 +89,11 @@
                 `;
                 orderDiv.appendChild(orderDetailsDiv);
                 orderDiv.querySelector('.view-btn').style.display = 'none';
+                hideLoading();
             },
             error: function(error) {
                 console.error('Error fetching order details:', error);
+                hideLoading();
             }
         });
     }
@@ -100,6 +106,7 @@
     }
 
     window.saveOrderStatus = function(orderId) {
+        showLoading();
         const orderDiv = document.querySelector(`#order-${orderId}`);
         const selectElement = orderDiv.querySelector(`.status-dropdown[data-order-id="${orderId}"]`);
         const newStatus = selectElement.value;
@@ -116,15 +123,18 @@
                 var parsedResponse = JSON.parse(response);
                 show_message(parsedResponse.message);
                 fetchOrders(); 
+                hideLoading();
             },
             error: function(error) {
                 console.error('Error updating order status:', error);
+                hideLoading();
             }
         });
     }
 
     window.deleteOrder = function(orderId) {
         if (confirm("Are you sure you want to delete this order?")) {
+            showLoading();
             $.ajax({
                 url: `SYS/admin_orderhandler.php`,
                 method: 'DELETE',
@@ -133,9 +143,11 @@
                     var parsedResponse = JSON.parse(response);
                     show_message(parsedResponse.message);
                     fetchOrders(); 
+                    hideLoading();
                 },
                 error: function(error) {
                     console.error('Error deleting order:', error);
+                    hideLoading();
                 }
             });
         }
@@ -152,13 +164,16 @@
     });
     
     window.fetchAccounts = function() {
+        showLoading();
         $.ajax({
+            
             url: 'SYS/admin_accounthandler.php',
             method: 'GET',
             dataType: 'json',
             success: function(accounts) {
                 if (!Array.isArray(accounts)) {
                     accountsSection.innerHTML = 'No accounts found';
+                    hideLoading();
                     return;
                 }
     
@@ -204,11 +219,13 @@
                         </div>
                     `;
                     accountsSection.appendChild(accountDiv);
+                    hideLoading();
                 });
 
             },
             error: function(error) {
                 console.error('Error fetching accounts:', error);
+                hideLoading();
             }
         });
     };
@@ -225,6 +242,7 @@
 
     window.deleteAccount = function(email) {
         if (confirm('Are you sure you want to delete this account?')) {
+            showLoading();
             $.ajax({
                 url: 'SYS/admin_accounthandler.php',
                 method: 'DELETE',
@@ -236,9 +254,11 @@
                     } else {
                         show_message('Failed to delete account: ' + response.message);
                     }
+                    hideLoading();
                 },
                 error: function(error) {
                     console.error('Error deleting account:', error);
+                    hideLoading();
                 }
             });
         }

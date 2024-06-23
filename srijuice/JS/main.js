@@ -53,6 +53,10 @@ function show_message(text,href,htext){
 
 }
 
+
+
+
+
 function getCookie(name) {
     let value = "; " + document.cookie;
     let parts = value.split("; " + name + "=");

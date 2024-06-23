@@ -45,14 +45,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $text = $email . "-" . time();
         $encryptedText = encrypt($text, $key);
+        $reset_link = $current_url . '?code=' . $encryptedText;
+
         $title = "Password Reset";
-        $body = "Please click the link below to reset your password. Note: The link will expire 10 minutes after this email was sent." . "<br>" . $current_url . '?code=' . $encryptedText;
+        $body = '
+            <html>
+            <head>
+                <style>
+                    body { font-family: Arial, sans-serif; }
+                    .container { width: 600px; margin: 0 auto; }
+                    .header { background-color: #f8f8f8; padding: 20px; text-align: center; }
+                    .content { padding: 20px; }
+                    .footer { background-color: #f8f8f8; padding: 10px; text-align: center; font-size: 12px; color: #666; }
+                    .button { background-color: #4CAF50; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 16px; }
+                    .link { color: #4CAF50; text-decoration: none; }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="header">
+                        <h1>Password Reset Request</h1>
+                    </div>
+                    <div class="content">
+                        <p>Dear User,</p>
+                        <p>You have requested to reset your password. Please click the button below to reset your password. Note: The link will expire 10 minutes after this email was sent.</p>
+                        <p><a href="' . $reset_link . '" class="button">Reset Password</a></p>
+                        <p>If the button above does not work, please click on the link below or copy and paste it into your browser:</p>
+                        <p><a href="' . $reset_link . '" class="link">' . $reset_link . '</a></p>
+                        <p>If you did not request a password reset, please ignore this email.</p>
+                        <p>Best regards,<br>Srijuice Team</p>
+                    </div>
+                    <div class="footer">
+                        <p>&copy; ' . date('Y') . ' Srijuice. All rights reserved.</p>
+                    </div>
+                </div>
+            </body>
+            </html>';
+
         $result = sendEmail($email, $email, $title, $body);
         echo json_encode(array('success' => true));
     } catch (Exception $e) {
         echo json_encode(array('success' => false, 'message' => $e->getMessage()));
     }
 }
+
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     try {
@@ -79,7 +115,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
         $email = $words[0];
         $otime = $words[1];
-
 
 
         if (time() - $otime > 600) {

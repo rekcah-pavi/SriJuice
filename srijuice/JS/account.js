@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+    showLoading();
+    
     const ordersBtn = document.getElementById('ordersBtn');
     const editAccountBtn = document.getElementById('editAccountBtn');
     const addressBtn = document.getElementById('addressBtn');
@@ -59,6 +62,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const postalCodeInput = document.getElementById("postalCode");
     const phoneInput = document.getElementById("phone");
 
+    
+
     $.ajax({
         url: 'SYS/details.php',
         type: 'GET',
@@ -112,9 +117,12 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error fetching orders:', error);
         }
     });
+
+    hideLoading();
 });
 
 function viewOrder(orderId) {
+    showLoading();
     $.ajax({
         url: `SYS/orderhandler.php?id=${orderId}`,
         type: 'GET',
@@ -142,9 +150,11 @@ function viewOrder(orderId) {
             `;
             orderDiv.appendChild(orderDetailsDiv);
             orderDiv.querySelector('.view-btn').style.display = 'none';
+            hideLoading();
         },
         error: function(xhr, status, error) {
             console.error('Error fetching order details:', error);
+            hideLoading();
         }
     });
 }
@@ -157,6 +167,7 @@ function viewLessOrder(orderId) {
 }
 
 function change_adr() {
+    showLoading();
     var province = document.getElementById("province").value;
     var district = document.getElementById("district").value;
     var area = document.getElementById("area").value;
@@ -180,9 +191,11 @@ function change_adr() {
             var parsedResponse = JSON.parse(response);
             console.log(parsedResponse);
             show_message("Address updated successfully");
+            hideLoading();
         },
         error: function(xhr, status, error) {
             console.error("AJAX request failed: ", status, error);
+            hideLoading();
         }
     });
 }

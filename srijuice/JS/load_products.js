@@ -1,3 +1,6 @@
+
+
+showLoading();
 function addProduct(containerId, imgSrc, title, price, isAdmin = false) {
     const productsContainer = document.querySelector(containerId);
 
@@ -90,6 +93,7 @@ function addNewProductCard() {
 }
 
 function loadProductsByType(type, containerId) {
+    showLoading();
     $.ajax({
         url: 'SYS/producthandler.php',
         method: 'GET',
@@ -99,9 +103,11 @@ function loadProductsByType(type, containerId) {
             products.forEach(product => {
                 addProduct(containerId, product.img_path, product.name, product.price, product.isAdmin);
             });
+            hideLoading();
         },
         error: function(xhr, status, error) {
             console.error("AJAX Error:", status, error);
+            hideLoading();
         }
     });
 }
@@ -110,6 +116,7 @@ function loadProductsByType(type, containerId) {
 
 
 function fetchProductTypes() {
+    showLoading();
     $.ajax({
         url: 'SYS/producthandler.php',
         method: 'GET',
@@ -132,17 +139,22 @@ function fetchProductTypes() {
                 document.getElementById('product-container').appendChild(section);
 
                 loadProductsByType(type, '#' + row.id);
+                
             });
+            hideLoading();
         },
         error: function(xhr, status, error) {
             console.error("AJAX Error:", status, error);
+            hideLoading();
         }
+        
     });
 }
 
 
 function deleteProduct(name) {
     if (confirm("Are you sure you want to delete " + name + "?")) {
+        showLoading();
         $.ajax({
             type: "POST",
             url: "SYS/producthandler.php",
@@ -159,10 +171,12 @@ function deleteProduct(name) {
                 } else {
                     show_message(result.message);
                 }
+                hideLoading();
             },
             error: function(xhr, status, error) {
                 console.error("AJAX Error:", status, error);
                 show_message('Failed to delete product.');
+                hideLoading();
             }
         });
     }
@@ -241,6 +255,7 @@ document.querySelectorAll('.bclose').forEach(span => {
 
 document.getElementById('editProductForm').onsubmit = function(event) {
     event.preventDefault();
+    showLoading();
 
     const formData = {
         action: 'edit',
@@ -265,15 +280,18 @@ document.getElementById('editProductForm').onsubmit = function(event) {
             } else {
                 show_message(result.message);
             }
+            hideLoading();
         },
         error: function() {
             show_message('Failed to update product.');
+            hideLoading();
         }
     });
 }
 
 document.getElementById('addProductForm').onsubmit = function(event) {
     event.preventDefault();
+    showLoading();
 
     const formData = {
         action: 'add',
@@ -297,10 +315,13 @@ document.getElementById('addProductForm').onsubmit = function(event) {
             } else {
                 show_message(result.message);
             }
+            hideLoading();
         },
         error: function() {
             show_message('Failed to add product.');
+            hideLoading();
         }
+
     });
 }
 
@@ -341,3 +362,5 @@ if (currentUrl.includes('user=admin')) {
 
 
 
+
+hideLoading();

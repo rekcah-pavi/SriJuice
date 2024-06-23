@@ -1,3 +1,5 @@
+showLoading();
+
 function addProduct(containerId, imgSrc, title, price, isAdmin = false) {
     const productsContainer = document.querySelector(containerId);
 
@@ -260,3 +262,6 @@ window.onclick = function(event) {
         closeModal();
     }
 }
+
+
+hideLoading();

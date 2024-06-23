@@ -35,6 +35,7 @@ function forgetpass(email) {
   }
 
   if (confirm("Do you want to reset password?")) {
+        showLoading();
         $.ajax({
             type: "POST",
             url: "SYS/pass_reset.php", 
@@ -43,15 +44,21 @@ function forgetpass(email) {
             success: function(response) {
                 if (response.success) {
                     show_message("password reset has been sent to your email!");
+                    hideLoading();
+                    
                 } else {
                     show_message("Failed ~> "+response.message);
+                    hideLoading();
                 }
             },
             error: function(xhr, status, error) {
                 show_message("Error occurred while sending request. ~> "+error.message);
                 console.error(xhr, status, error);
+                hideLoading();
             }
         });
+        
+        
       }
 }
 
@@ -113,7 +120,7 @@ if (urlParams.get('status') === 'codexp') {
 }
 
 if (urlParams.get('status') === 'resetd') {
-  show_message("Passsword reset Sucess! click eye icon to check your password,you can  change it in your account setting");
+  show_message("Password reset successful! Click the eye icon to check your password. You can change it in your account settings.");
 }
 
 if (urlParams.get('email')){

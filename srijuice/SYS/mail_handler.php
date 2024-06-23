@@ -7,10 +7,12 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 function sendEmail($recipientEmail, $recipientName, $subject, $body) {
+    
     $smtp_host= "";
-    $smtp_port="587";
+    $smtp_port="";
     $mail_username="";
     $mail_password= "";
+
 
 
     $mail = new PHPMailer(true);
