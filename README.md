@@ -48,6 +48,7 @@ This project is a Responsive E-Commerce website named Srijuice. The website allo
 
 - Php
 - MySQL Database
+- SMTP Server
 
 ### Installation
 
@@ -68,7 +69,7 @@ This project is a Responsive E-Commerce website named Srijuice. The website allo
      $database = "";
      ```
 
-3. **Configure Email:**
+3. **Configure SMTP:**
    - Open `SYS/mail_handler.php`.
    - Update the following fields with your details:
      ```php
