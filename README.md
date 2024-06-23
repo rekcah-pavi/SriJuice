@@ -28,6 +28,17 @@ This project is a Responsive E-Commerce website named Srijuice. The website allo
 </table>
 
 
+<table>
+  <tr>
+    <td><img src="https://github.com/rekcah-pavi/SriJuice/blob/main/photos/s1.png?raw=true"/></td>
+    <td><img src="https://github.com/rekcah-pavi/SriJuice/blob/main/photos/s2.png?raw=true"/></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/rekcah-pavi/SriJuice/blob/main/photos/s3.png?raw=true"/></td>
+    <td><img src="https://github.com/rekcah-pavi/SriJuice/blob/main/photos/s4.png?raw=true"/></td>
+  </tr>
+
+</table>
 
 
 
